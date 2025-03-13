@@ -4,6 +4,8 @@ import click
 import cv2
 import torch
 
+from tqdm import trange
+
 from src import UNet, sample
 
 
@@ -13,9 +15,9 @@ from src import UNet, sample
 @click.argument('batch_size', type=int, default=16)
 def main(num_samples: int, device: str, batch_size: int) -> None:
     unet = UNet(3).eval().to(device)
-    unet.load_state_dict(torch.load('checkpoints/model.pt'))
+    unet.load_state_dict(torch.load('checkpoints/model1.pt'))
 
-    for start in range(0, num_samples, batch_size):
+    for start in trange(0, num_samples, batch_size):
         ns = min(num_samples - start, batch_size)
         generated = sample(
             ns, unet, device,

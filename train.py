@@ -20,11 +20,10 @@ from src import UNet, HistologyDataset, sample
 
 
 def schedule(epoch: int) -> float:
-    print(epoch)
     if epoch < 50:
-        return 1e-3
-    if epoch < 100:
         return 1e-4
+    if epoch < 100:
+        return 1e-5
 
     return 1e-5
 
@@ -118,8 +117,9 @@ def main(
 
 
     model = UNet(3).train().to(device)
+    model.load_state_dict(torch.load('checkpoints/model1.pt'))
     parameter_count = sum(p.numel() for p in model.parameters())
-    optimizer = Adam(model.parameters(), lr=1e-4)
+    optimizer = Adam(model.parameters(), lr=1e-5)
     # scheduler = LambdaLR(optimizer, schedule)
     # scheduler.step()
 
