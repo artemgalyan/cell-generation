@@ -15,7 +15,7 @@ from src import UNet, sample
 @click.argument('batch_size', type=int, default=16)
 def main(num_samples: int, device: str, batch_size: int) -> None:
     unet = UNet(3).eval().to(device)
-    unet.load_state_dict(torch.load('checkpoints/model1.pt'))
+    unet.load_state_dict(torch.load('checkpoints/model.pt'))
 
     for start in trange(0, num_samples, batch_size):
         ns = min(num_samples - start, batch_size)
