@@ -28,5 +28,6 @@ def main(num_samples: int, device: str, batch_size: int) -> None:
             image = generated_sample[..., ::-1]
             cv2.imwrite(str(save_path), image)
 
+
 if __name__ == '__main__':
     main()
