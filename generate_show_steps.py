@@ -30,7 +30,7 @@ def main(num_steps: int, device: str) -> None:
     states = odeint(odefunc, z, t, atol=1e-4, method='dopri5')
     image = torch.cat(list(states), dim=-1)
     image = (255 * image[0].permute(1, 2, 0).cpu().numpy().clip(0, 1)).astype('uint8')
-    cv2.imwrite('big-image.png', image)
+    cv2.imwrite('denoise.png', image)
 
 
 if __name__ == '__main__':

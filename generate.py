@@ -25,6 +25,8 @@ def main(num_samples: int, device: str, batch_size: int) -> None:
         )
 
         output_path = Path('samples')
+        output_path.mkdir(exist_ok=True)
+
         for idx, generated_sample in enumerate(generated):
             save_path = str(output_path / f'{start + idx}.png')
             image = generated_sample[..., ::-1]
